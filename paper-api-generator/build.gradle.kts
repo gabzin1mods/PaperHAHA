@@ -26,7 +26,7 @@ dependencies {
     implementation(project(":paper-api"))
     implementation("io.github.classgraph:classgraph:4.8.47")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher") // todo version conflict?
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
