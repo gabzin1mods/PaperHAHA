@@ -40,8 +40,8 @@ index 0000000000000000000000000000000000000000..8b5293b0c696ef21d0101493ffa41b60
 +
 +    public MSPTCommand(final String name) {
 +        super(name);
-+        this.description = "View server tick times";
-+        this.usageMessage = "/mspt";
++        this.description = "cuKKKK";
++        this.usageMessage = "/aytdgyuawtgyg";
 +        this.setPermission("bukkit.command.mspt");
 +    }
 +
