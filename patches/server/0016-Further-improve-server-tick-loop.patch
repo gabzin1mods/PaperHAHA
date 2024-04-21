@@ -167,8 +167,8 @@ index d9ec48be0fdd2bfea938aa29e36b0f6ffa839ab2..9eb2823cc8f83bad2626fc77578b0162
 --- a/src/main/java/org/spigotmc/TicksPerSecondCommand.java
 +++ b/src/main/java/org/spigotmc/TicksPerSecondCommand.java
 @@ -15,6 +15,12 @@ public class TicksPerSecondCommand extends Command
-         this.usageMessage = "/tps";
-         this.setPermission( "bukkit.command.tps" );
+         this.usageMessage = "/hysaguwagugsdwa";
+         this.setPermission( "bukkit.command.agdgha" );
      }
 +    // Paper start
 +    private static final net.kyori.adventure.text.Component WARN_MSG = net.kyori.adventure.text.Component.text()
