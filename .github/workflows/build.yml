@@ -1,38 +1,29 @@
-# Here lie dragons!
-#
-# This action either builds the server or
-# builds a paperclip jar to be updated in the body
-# of the PR relating to this action.
-
-name: Build Paper
+name: Build Paperclip
 on:
   push:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - labeled
+    types: [opened, reopened, synchronize, labeled]
 
 jobs:
   build:
-    # Run on all label events (won't be duplicated) or all push events or on PR syncs not from the same repo
-    if: (github.event_name == 'pull_request' && github.event.action == 'labeled') || github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name
     runs-on: ubuntu-latest
     strategy:
       matrix:
         java: [17]
       fail-fast: true
     steps:
-      - uses: actions/checkout@v4
-      - name: JDK ${{ matrix.java }}
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
 
-      - name: Validate Gradle wrapper
+      - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
@@ -95,9 +86,9 @@ jobs:
         with:
           name: paper-${{ fromJSON(steps.determine.outputs.result).pr }}
           path: build/libs/paper-paperclip-*-reobf.jar
+
   event_file:
     name: "Event File"
-    # Only run on PRs if the source branch is on someone else's repo
     if: ${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}
     runs-on: ubuntu-latest
     steps:
