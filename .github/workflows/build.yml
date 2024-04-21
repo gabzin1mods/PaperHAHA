@@ -1,8 +1,10 @@
 name: Build Paperclip
 on:
   push:
+    branches:
+      - '*'
   pull_request:
-    types: [opened, reopened, synchronize, labeled]
+    types: [opened, reopened, synchronize]
 
 jobs:
   build:
@@ -27,38 +29,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Configure Build
-        uses: actions/github-script@v7
-        id: determine
-        with:
-          script: |
-            const {owner, repo} = context.repo;
-            const event_name = "${{ github.event_name }}";
-            const event = ${{ toJSON(github.event) }};
-            const ref_type = "${{ github.ref_type }}";
-            const ref_name = "${{ github.ref_name }}";
-            const result = {
-              action: "build"
-            };
-
-            if (event_name === "push" && ref_type === "branch") {
-              const {data: pulls} = await github.rest.pulls.list({ owner, repo, head: `${owner}:${ref_name}`, state: "open" });
-              const pull = pulls.find((pr) => !!pr.labels.find((l) => l.name === "build-pr-jar"));
-              if (pull) {
-                result["pr"] = pull.number;
-                result["action"] = "paperclip";
-                core.notice(`This is a push action but to a branch with an open PR with the build paperclip label (${JSON.stringify(result)})`);
-                return result;
-              }
-            } else if (event_name === "pull_request" && event.pull_request.labels.find((l) => l.name === "build-pr-jar")) {
-              result["pr"] = event.pull_request.number;
-              result["action"] = "paperclip";
-              core.notice(`This is a pull request action with a build paperclip label (${JSON.stringify(result)})`);
-              return result;
-            }
-            core.notice("This will not build a paperclip jar");
-            return result;
-
       - name: Apply Patches
         run: |
           git config --global user.email "no-reply@github.com"
@@ -77,14 +47,12 @@ jobs:
             **/build/test-results/test/TEST-*.xml
 
       - name: Create Paperclip Jar
-        if: fromJSON(steps.determine.outputs.result).action == 'paperclip'
         run: ./gradlew createReobfPaperclipJar --stacktrace
 
       - name: Upload Paperclip Jar
-        if: fromJSON(steps.determine.outputs.result).action == 'paperclip'
         uses: actions/upload-artifact@v4
         with:
-          name: paper-${{ fromJSON(steps.determine.outputs.result).pr }}
+          name: paperclip
           path: build/libs/paper-paperclip-*-reobf.jar
 
   event_file:
