@@ -108,10 +108,10 @@ index 0000000000000000000000000000000000000000..f0fce4113fb07c64adbec029d177c236
 +
 +    public PaperPluginsCommand() {
 +        super("plugins");
-+        this.description = "eihyuggtywftyfiwgatifa";
-+        this.usageMessage = "/sagfawtyf1tysfwaughuawghudsg";
-+        this.setPermission("bukkit.command.yawty");
-+        this.setAliases(Arrays.asList("wg7f68gtafgwtyfwatyftdfasdwa"));
++        this.description = "Gets a list of plugins running on the server";
++        this.usageMessage = "/plugins";
++        this.setPermission("bukkit.command.plugins");
++        this.setAliases(Arrays.asList("pl"));
 +    }
 +
 +    private static <T> List<Component> formatProviders(TreeMap<String, PluginProvider<T>> plugins) {
