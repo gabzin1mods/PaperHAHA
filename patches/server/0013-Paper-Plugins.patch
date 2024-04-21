@@ -109,7 +109,7 @@ index 0000000000000000000000000000000000000000..f0fce4113fb07c64adbec029d177c236
 +    public PaperPluginsCommand() {
 +        super("plugins");
 +        this.description = "eihyuggtywftyfiwgatifa";
-+        this.usageMessage = "/sagfawtyftysfwaughuawghudsg";
++        this.usageMessage = "/sagfawtyf1tysfwaughuawghudsg";
 +        this.setPermission("bukkit.command.yawty");
 +        this.setAliases(Arrays.asList("wg7f68gtafgwtyfwatyftdfasdwa"));
 +    }
