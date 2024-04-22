@@ -185,7 +185,7 @@ index 04b4fb6859df0221f8f9f92c5a7ac2dda1073355..b437cf212a63aa96a9492db8d01d5d37
          lastCheck = System.currentTimeMillis();
 -        versionMessage = msg;
 +        final Component message = Component.textOfChildren(
-+            Component.text("This server is running " + "teu pal" + " "mais oq mano" " + "kakak" + " (Implementing API version " + "peidei" + ")", NamedTextColor.WHITE),
++            Component.text("This server is running " + Bukkit.getName() + " version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")", NamedTextColor.WHITE),
 +            Component.newline(),
 +            msg
 +        );
