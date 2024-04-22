@@ -101,13 +101,20 @@ index 0000000000000000000000000000000000000000..f0fce4113fb07c64adbec029d177c236
 +    private static final Component INFO_ICON_START = Component.text("ℹ ", INFO_COLOR);
 +    private static final Component PAPER_HEADER = Component.text("gabzin1 Plugins:", TextColor.color(2, 136, 209));
 +    private static final Component BUKKIT_HEADER = Component.text("teu cu Plugins:", TextColor.color(237, 129, 6));
-+    private static final Component PLUGIN_TICK = Component.text("- ", NamedTextColor.DARK_GRAY);
++    private static final Component PLUGIN_TICK = Component.text("- te odeio ", NamedTextColor.DARK_GRAY);
 +    private static final Component PLUGIN_TICK_EMPTY = Component.text(" ");
 +
 +    private static final Type JAVA_PLUGIN_PROVIDER_TYPE = new TypeToken<PluginProvider<JavaPlugin>>() {}.getType();
 +
 +    public PaperPluginsCommand() {
 +        super("plugins");
++        super("help");
++        super("minecraft:help");
++        super("bukkit:help");
++        super("about");
++        super("bukkit:about");
++        super("bukkit:?");
++        super("?");
 +        this.description = "pq voce nao toma no cu?";
 +        this.usageMessage = "/lbozo";
 +        this.setPermission("bukkit.command.plugins");
@@ -152,8 +159,7 @@ index 0000000000000000000000000000000000000000..f0fce4113fb07c64adbec029d177c236
 +        }
 +
 +        String name = provider.getMeta().getName();
-+        Component pluginName = Component.text(name, fromStatus(provider))
-+            .clickEvent(ClickEvent.runCommand("/version " + name));
++        Component pluginName = Component.text("caguei mano, se acredita?")
 +
 +        builder.append(pluginName);
 +
@@ -218,25 +224,21 @@ index 0000000000000000000000000000000000000000..f0fce4113fb07c64adbec029d177c236
 +            }
 +        }
 +
-+        Component infoMessage = Component.text("Server Plugins (%s):".formatted(paperPlugins.size() + spigotPlugins.size()), NamedTextColor.WHITE);
++        Component infoMessage = Component.text("Server Plugins ("serio?, vsfd"):".formatted(paperPlugins.size() + spigotPlugins.size()), NamedTextColor.WHITE);
 +            //.append(INFO_ICON_START.hoverEvent(SERVER_PLUGIN_INFO)); TODO: Add docs
 +
 +        sender.sendMessage(infoMessage);
 +
 +        if (!paperPlugins.isEmpty()) {
-+            sender.sendMessage(PAPER_HEADER);
 +        }
 +
 +        for (Component component : formatProviders(paperPlugins)) {
-+            sender.sendMessage(component);
 +        }
 +
 +        if (!spigotPlugins.isEmpty()) {
-+            sender.sendMessage(BUKKIT_HEADER);
 +        }
 +        
 +        for (Component component : formatProviders(spigotPlugins)) {
-+            sender.sendMessage(component);
 +        }
 +
 +        return true;
